@@ -1,3 +1,4 @@
+import DraggableNote from "./DraggableNote";
 import PlantIcon from "./PlantIcon";
 import { StickyNote, TornNote } from "./StickyNote";
 
@@ -15,24 +16,27 @@ export default function Hero() {
           Arabela Paguio
         </h1>
 
-        <StickyNote
-          color="yellow"
-          rotate="rotate-3"
+        <DraggableNote
+          rotate={3}
           className="absolute -right-4 -top-10 hidden sm:block sm:-right-16 sm:-top-16"
         >
-          Previously UX
-          <br />
-          Researcher @<br />
-          Sheridan
-        </StickyNote>
+          <StickyNote color="yellow">
+            Previously UX
+            <br />
+            Researcher @<br />
+            Sheridan
+          </StickyNote>
+        </DraggableNote>
       </div>
 
       <div className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-10">
-        <TornNote rotate="-rotate-6" className="hidden sm:block">
-          Previously Design
-          <br />
-          Lead @ Hackville
-        </TornNote>
+        <DraggableNote rotate={-6} className="hidden sm:block">
+          <TornNote>
+            Previously Design
+            <br />
+            Lead @ Hackville
+          </TornNote>
+        </DraggableNote>
 
         <div className="flex flex-col items-center gap-4">
           <PlantIcon className="h-10 w-10" />
@@ -42,9 +46,9 @@ export default function Hero() {
           </p>
         </div>
 
-        <StickyNote color="green" rotate="rotate-2" className="hidden sm:block">
-          Open for work :)
-        </StickyNote>
+        <DraggableNote rotate={2} className="hidden sm:block">
+          <StickyNote color="green">Open for work :)</StickyNote>
+        </DraggableNote>
       </div>
     </section>
   );
