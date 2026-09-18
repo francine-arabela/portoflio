@@ -12,6 +12,7 @@ export default function MainWorks() {
           title="Improving Sheridan's student chatbot"
           description="Improved student chatbot during its transition to ServiceNow, enhancing information access and the student support experience."
           tags={["CO-OP", "UX RESEARCH", "CONTENT DESIGN"]}
+          href="/works/sheridan-chatbot"
         >
           <ChatbotMockup />
         </ProjectCard>

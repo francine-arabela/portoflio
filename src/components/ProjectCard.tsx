@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 
 type ProjectCardProps = {
   title: string;
@@ -9,14 +10,20 @@ type ProjectCardProps = {
 };
 
 export default function ProjectCard({ title, description, tags, href, children }: ProjectCardProps) {
+  const image = (
+    <div className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-card-bg transition-transform sm:aspect-[16/10]">
+      {children}
+    </div>
+  );
+
   return (
     <article className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[1fr_1.6fr] sm:gap-10">
       <div>
         <h3 className="font-display text-2xl leading-snug text-ink sm:text-[26px]">
           {href ? (
-            <a href={href} className="hover:text-accent">
+            <Link href={href} className="hover:text-accent">
               {title}
-            </a>
+            </Link>
           ) : (
             title
           )}
@@ -34,9 +41,13 @@ export default function ProjectCard({ title, description, tags, href, children }
         </ul>
       </div>
 
-      <div className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-card-bg sm:aspect-[16/10]">
-        {children}
-      </div>
+      {href ? (
+        <Link href={href} className="block hover:opacity-90">
+          {image}
+        </Link>
+      ) : (
+        image
+      )}
     </article>
   );
 }
