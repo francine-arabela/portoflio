@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #ffffff;
+  --ink: #1c1c1c;
+  --ink-soft: #4a4a4a;
+  --ink-faint: #8a8a8a;
+  --accent: #9a1c1c;
+  --accent-dark: #7c1616;
+  --sticky-yellow: #fdf1a8;
+  --sticky-blue: #d9e6f5;
+  --sticky-green: #d3ecd6;
+  --footer-bg: #262626;
+  --card-bg: #f4f4f2;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-sticky-yellow: var(--sticky-yellow);
+  --color-sticky-blue: var(--sticky-blue);
+  --color-sticky-green: var(--sticky-green);
+  --color-footer-bg: var(--footer-bg);
+  --color-card-bg: var(--card-bg);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --font-sans: var(--font-sans);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
