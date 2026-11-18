@@ -1,53 +1,66 @@
 import DraggableNote from "./DraggableNote";
-import PlantIcon from "./PlantIcon";
-import { StickyNote, TornNote } from "./StickyNote";
+import { BinderNote, DashedNote, FoldedNote } from "./StickyNote";
+
+/* Positions come from the Figma frame: each note's centre is given as an
+   offset from the hero column's centre line and from the top of the section. */
+const notePosition = (dx: number, top: number) => ({
+  left: `calc(50% + ${dx}px)`,
+  top: `${top}px`,
+});
 
 export default function Hero() {
   return (
-    <section id="top" className="relative mx-auto max-w-5xl px-6 pb-20 pt-16 text-center sm:pt-24">
-      <p className="font-mono text-xs tracking-[0.2em] text-ink-soft">
-        PRODUCT &amp; VISUAL DESIGNER
-      </p>
-
-      <div className="relative mt-4">
-        <h1 className="font-display text-5xl leading-tight text-accent sm:text-6xl">
-          Francine
-          <br />
-          Arabela Paguio
-        </h1>
-
-        <DraggableNote
-          rotate={3}
-          className="absolute -right-4 -top-10 hidden sm:block sm:-right-16 sm:-top-16"
-        >
-          <StickyNote color="yellow">
-            Previously UX
-            <br />
-            Researcher @<br />
-            Sheridan
-          </StickyNote>
-        </DraggableNote>
-      </div>
-
-      <div className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-10">
-        <DraggableNote rotate={-6} className="hidden sm:block">
-          <TornNote>
-            Previously Design
-            <br />
-            Lead @ Hackville
-          </TornNote>
-        </DraggableNote>
-
-        <div className="flex flex-col items-center gap-4">
-          <PlantIcon className="h-10 w-10" />
-          <p className="max-w-xs text-sm leading-relaxed text-ink-soft">
-            A designer who is always curious, learning, and growing to create
-            meaningful, human-centered experiences.
+    <section id="about" className="relative px-6 pb-24 pt-20 lg:pb-[285px] lg:pt-[189px]">
+      <div className="mx-auto flex w-full max-w-[463px] lg:-translate-x-[7px] flex-col items-center gap-[39px] text-center">
+        <div className="flex w-full max-w-[397px] flex-col gap-[55px]">
+          <p className="font-helvetica text-[15px] leading-[1.624] tracking-[0.05em] text-text-body">
+            Hi! I’m FRANCINE PAGUIO
           </p>
+          <h1 className="whitespace-pre-wrap font-serif-book text-[48px] font-normal leading-[1.2] text-brand sm:text-[60px]">
+            {"UI/UX  & Visual Designer"}
+          </h1>
         </div>
 
-        <DraggableNote rotate={2} className="hidden sm:block">
-          <StickyNote color="green">Open for work :)</StickyNote>
+        <div className="flex w-full max-w-[309px] flex-col items-center gap-[35px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/figma/plant.png"
+            alt=""
+            width={121}
+            height={102}
+            className="h-[102px] w-[121px] object-cover object-bottom opacity-95"
+          />
+          <p className="font-helvetica text-[15px] font-light leading-[1.2] text-text-body">
+            A designer who is always curious, learning, and growing to create meaningful,{" "}
+            <br className="hidden sm:inline" />
+            human-centered experiences.
+          </p>
+        </div>
+      </div>
+
+      <div className="hidden lg:block">
+        <DraggableNote
+          rotate={5.7}
+          className="absolute -translate-x-1/2 -translate-y-1/2"
+          style={notePosition(253.4, 247.1)}
+        >
+          <FoldedNote>Previously UX Researcher @ SHERIDAN</FoldedNote>
+        </DraggableNote>
+
+        <DraggableNote
+          rotate={-11.46}
+          className="absolute -translate-x-1/2 -translate-y-1/2"
+          style={notePosition(-312.2, 423.3)}
+        >
+          <BinderNote>Previously Design Lead @ HACKVILLE</BinderNote>
+        </DraggableNote>
+
+        <DraggableNote
+          rotate={7.26}
+          className="absolute -translate-x-1/2 -translate-y-1/2"
+          style={notePosition(268.75, 517.6)}
+        >
+          <DashedNote>Open for work :)</DashedNote>
         </DraggableNote>
       </div>
     </section>

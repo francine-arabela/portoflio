@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Space_Mono, Inter } from "next/font/google";
+import {
+  Playfair_Display,
+  Space_Mono,
+  Inter,
+  DM_Mono,
+  Fraunces,
+  Archivo_Narrow,
+  Caveat,
+} from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -19,17 +27,42 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+// Figma "Portfolio 2026" fonts. The design uses Adobe fonts (P22 Mackinac Pro,
+// Elza Narrow, Adobe Handwriting Ernie); these are the closest Google Fonts.
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
+const fraunces = Fraunces({
+  variable: "--font-serif-book",
+  subsets: ["latin"],
+});
+
+const archivoNarrow = Archivo_Narrow({
+  variable: "--font-narrow",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
+const caveat = Caveat({
+  variable: "--font-hand",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 export const metadata: Metadata = {
-  title: "Francine Arabela Paguio — Product & Visual Designer",
+  title: "Francine Arabela Paguio — UI/UX & Visual Designer",
   description:
-    "Product & visual designer who is always curious, learning, and growing to create meaningful, human-centered experiences.",
+    "UI/UX & visual designer who is always curious, learning, and growing to create meaningful, human-centered experiences.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${spaceMono.variable} ${inter.variable} antialiased`}
+      className={`${playfair.variable} ${spaceMono.variable} ${inter.variable} ${dmMono.variable} ${fraunces.variable} ${archivoNarrow.variable} ${caveat.variable} antialiased`}
     >
       <body className="bg-paper text-ink">{children}</body>
     </html>

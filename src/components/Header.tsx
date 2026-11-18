@@ -1,45 +1,54 @@
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Works", href: "#works" },
-  { label: "About", href: "#about" },
-  { label: "Playground", href: "#playground" },
+  { label: "WORKS", href: "/#works" },
+  { label: "ABOUT", href: "/#about" },
+  { label: "PLAYGROUND", href: "/#playground" },
 ];
+
+function Logo() {
+  return (
+    <span className="relative block h-[42.807px] w-[28px]" aria-hidden="true">
+      {/* eslint-disable @next/next/no-img-element */}
+      <img src="/figma/logo-group.svg" alt="" width={28} height={41.763} className="absolute left-0 top-0" />
+      <img src="/figma/logo-v1.svg" alt="" width={2.741} height={3.766} className="absolute left-[3.88px] top-[38.6px]" />
+      <img src="/figma/logo-v2.svg" alt="" width={3.217} height={4.844} className="absolute left-[8.09px] top-[37.96px]" />
+      <img src="/figma/logo-v3.svg" alt="" width={3.092} height={0.641} className="absolute left-[9px] top-[13.2px]" />
+      {/* eslint-enable @next/next/no-img-element */}
+    </span>
+  );
+}
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-40 flex items-center justify-between border-b border-black/5 bg-paper/90 px-6 py-4 backdrop-blur-sm sm:px-10">
-      <Link href="#top" className="flex h-9 w-9 items-center justify-center rounded-full bg-ink/5">
-        <svg viewBox="0 0 32 32" className="h-6 w-6" aria-hidden="true">
-          <circle cx="16" cy="12" r="6" fill="#1c1c1c" />
-          <path
-            d="M6 30c0-6.5 4.5-11 10-11s10 4.5 10 11"
-            fill="none"
-            stroke="#1c1c1c"
-            strokeWidth="2"
-          />
-          <path d="M10 9c0-4 3-7 6-7s6 3 6 7" fill="#1c1c1c" />
-        </svg>
-        <span className="sr-only">Francine Arabela Paguio</span>
-      </Link>
+    <header className="sticky top-0 z-40 h-[85px] bg-white">
+      <div className="mx-auto grid h-full max-w-[1031px] grid-cols-[1fr_auto_1fr] items-center px-6 sm:items-start sm:pl-[23px] sm:pr-[13px]">
+        <Link href="/" className="justify-self-start sm:mt-[26px]">
+          <Logo />
+          <span className="sr-only">Francine Paguio, home</span>
+        </Link>
 
-      <nav className="flex gap-4 font-mono text-[11px] tracking-wide text-ink-soft sm:gap-10 sm:text-[13px]">
-        {navLinks.map((link) => (
-          <a key={link.label} href={link.href} className="transition-colors hover:text-ink">
-            {link.label}
-          </a>
-        ))}
-      </nav>
+        <nav className="flex gap-3 sm:mt-[39px] font-dm-mono text-[10px] tracking-[0.05em] text-text-muted sm:gap-[41px] sm:text-[13px]">
+          {navLinks.map((link) => (
+            <a key={link.label} href={link.href} className="transition-colors hover:text-brand">
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
-      <a
-        href="/resume.pdf"
-        target="_blank"
-        rel="noreferrer"
-        className="flex items-center gap-1.5 rounded-full bg-ink px-3 py-1.5 font-mono text-[11px] text-paper transition-opacity hover:opacity-85 sm:px-4 sm:py-2 sm:text-[13px]"
-      >
-        Resume
-        <span aria-hidden="true">↗</span>
-      </a>
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          rel="noreferrer"
+          className="flex w-fit items-center justify-center gap-[1.937px] justify-self-end sm:mt-[32px] sm:w-[99.823px] rounded-[7.959px] bg-brand px-2 py-1 font-dm-mono text-[11px] sm:px-[10px] sm:py-[6px] sm:text-[13.562px] font-medium text-white transition-opacity hover:opacity-85"
+        >
+          RESUME
+          <span className="flex h-[10.975px] w-[8.087px] items-center justify-center" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/figma/arrow-resume.svg" alt="" width={14.377} height={10.962} className="max-w-none shrink-0 -rotate-[53.62deg]" />
+          </span>
+        </a>
+      </div>
     </header>
   );
 }

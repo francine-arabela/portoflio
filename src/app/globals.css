@@ -12,6 +12,19 @@
   --sticky-green: #d3ecd6;
   --footer-bg: #262626;
   --card-bg: #f4f4f2;
+
+  /* Figma "Portfolio 2026" tokens */
+  --frame-bg: #3b3b3b;
+  --brand: #8b0303;
+  --text-strong: #323232;
+  --text-body: #424242;
+  --text-muted: #5f6566;
+  --text-desc: #685d5d;
+  --tag-bg: #f2f2f2;
+  --note-blue: #d6eaff;
+  --note-green: #d0f7d6;
+  --note-green-border: #446642;
+  --font-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @theme inline {
@@ -29,6 +42,22 @@
   --font-display: var(--font-display);
   --font-mono: var(--font-mono);
   --font-sans: var(--font-sans);
+
+  --color-frame-bg: var(--frame-bg);
+  --color-brand: var(--brand);
+  --color-text-strong: var(--text-strong);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-desc: var(--text-desc);
+  --color-tag-bg: var(--tag-bg);
+  --color-note-blue: var(--note-blue);
+  --color-note-green: var(--note-green);
+  --color-note-green-border: var(--note-green-border);
+  --font-dm-mono: var(--font-dm-mono);
+  --font-serif-book: var(--font-serif-book);
+  --font-narrow: var(--font-narrow);
+  --font-hand: var(--font-hand);
+  --font-helvetica: var(--font-helvetica);
 }
 
 body {

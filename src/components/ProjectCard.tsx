@@ -6,34 +6,35 @@ type ProjectCardProps = {
   description: string;
   tags: string[];
   href?: string;
+  muted?: boolean;
   children: ReactNode;
 };
 
-export default function ProjectCard({ title, description, tags, href, children }: ProjectCardProps) {
-  const image = (
-    <div className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-card-bg transition-transform sm:aspect-[16/10]">
-      {children}
-    </div>
-  );
-
+export default function ProjectCard({ title, description, tags, href, muted, children }: ProjectCardProps) {
   return (
-    <article className="grid grid-cols-1 items-center gap-8 sm:grid-cols-[1fr_1.6fr] sm:gap-10">
-      <div>
-        <h3 className="font-display text-2xl leading-snug text-ink sm:text-[26px]">
-          {href ? (
-            <Link href={href} className="hover:text-accent">
-              {title}
-            </Link>
-          ) : (
-            title
-          )}
-        </h3>
-        <p className="mt-3 text-sm leading-relaxed text-ink-soft">{description}</p>
-        <ul className="mt-4 flex flex-wrap gap-2">
+    <article className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex w-full flex-col gap-[29.83px] lg:w-[253px] lg:shrink-0">
+        <div className="flex flex-col gap-[17.898px]">
+          <h3
+            className={`p-[7.457px] font-serif-book text-[24px] leading-normal tracking-[-0.02em] ${
+              muted ? "text-[#656565]" : "text-text-strong"
+            }`}
+          >
+            {href ? (
+              <Link href={href} className="transition-colors hover:text-brand">
+                {title}
+              </Link>
+            ) : (
+              title
+            )}
+          </h3>
+          <p className="p-[7.457px] font-helvetica text-[12.415px] leading-[1.45] text-text-desc">{description}</p>
+        </div>
+        <ul className="flex flex-wrap gap-[11.932px]">
           {tags.map((tag) => (
             <li
               key={tag}
-              className="rounded-full bg-black/5 px-3 py-1 font-mono text-[10px] tracking-wide text-ink-soft"
+              className="min-w-[76px] rounded-[5px] bg-tag-bg px-[14px] py-[7.457px] text-center font-narrow text-[10.642px] uppercase leading-[1.45] tracking-[0.07em] text-frame-bg"
             >
               {tag}
             </li>
@@ -42,11 +43,11 @@ export default function ProjectCard({ title, description, tags, href, children }
       </div>
 
       {href ? (
-        <Link href={href} className="block hover:opacity-90">
-          {image}
+        <Link href={href} className="block w-full transition-opacity hover:opacity-90 lg:w-[596px] lg:shrink-0">
+          {children}
         </Link>
       ) : (
-        image
+        <div className="w-full lg:w-[596px] lg:shrink-0">{children}</div>
       )}
     </article>
   );
