@@ -1,29 +1,33 @@
+/* eslint-disable @next/next/no-img-element */
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import MainWorks from "@/components/MainWorks";
-import PostcardFooter from "@/components/PostcardFooter";
+import SiteFooter from "@/components/SiteFooter";
 
-/* Home page, built from Figma "Portfolio 2026" frame 625:1234: a white
-   1351px page on a dark frame, with the postcard hanging off the bottom edge
-   (half of it overlaps the white page). */
+/* Home page, matched to francine.design. On desktop (≥1200px) the white page
+   sits inside a dark frame with a 30px margin; on tablet and phone it fills
+   the screen. The bottom-right corner of the white page is folded over. */
 export default function Home() {
   return (
-    <div className="min-h-screen bg-frame-bg px-3 pb-[92px] pt-3 sm:px-[45px] sm:pt-10">
-      <div className="mx-auto max-w-[1351px] bg-white">
+    <div className="overflow-x-clip bg-white min-[1200px]:bg-frame-bg min-[1200px]:pt-[30px]">
+      <div className="relative bg-white pb-[110px] min-[1200px]:mx-[30px] pt-[30px] min-[810px]:pb-[300px] min-[1200px]:pt-0 min-[1200px]:pb-[435px]">
         <Header />
         <main>
-          <Hero />
-          <MainWorks />
-          {/* Reserves the top half of the postcard inside the white page. */}
-          <div className="mx-auto aspect-[680.37/215.2] w-full max-w-[680.37px]" aria-hidden="true" />
+          <div className="pt-[174px] min-[810px]:pt-[200px] min-[1200px]:pt-[135px]">
+            <Hero />
+          </div>
+          <div className="mt-[118px]">
+            <MainWorks />
+          </div>
         </main>
+        <img
+          src="/framer/page-fold.svg"
+          alt=""
+          aria-hidden="true"
+          className="absolute bottom-0 right-0 h-[73px] w-[73px]"
+        />
       </div>
-
-      <footer className="relative mx-auto aspect-[680.37/215.2] w-full max-w-[680.37px] lg:translate-x-[29.5px]">
-        <div className="absolute inset-x-0 bottom-0 h-[200%]">
-          <PostcardFooter />
-        </div>
-      </footer>
+      <SiteFooter overlap />
     </div>
   );
 }

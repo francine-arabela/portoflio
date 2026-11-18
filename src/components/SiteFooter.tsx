@@ -1,28 +1,45 @@
-import PostcardFooter from "./PostcardFooter";
+import PostcardFooter, { CONTACT_EMAIL } from "./PostcardFooter";
 
-/* Footer used by the case study pages: the postcard on the dark frame
-   colour, with contact links underneath. */
-export default function SiteFooter() {
+const links = [
+  { label: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/francinearabela" },
+  { label: "Are.na", href: "https://www.are.na/francine-paguio/channels" },
+];
+
+type SiteFooterProps = {
+  /** On the home page the postcard overlaps the white page above it. Other
+      pages get white space above the footer for the top of the card. */
+  overlap?: boolean;
+};
+
+/* Dark footer from francine.design: contact links on the left, copyright on
+   the right, and (on desktop) the flip postcard hanging over the top edge. */
+export default function SiteFooter({ overlap = false }: SiteFooterProps) {
   return (
-    <footer className="relative mt-24 bg-frame-bg px-3 pb-8 pt-16 sm:pt-24">
-      <div className="mx-auto w-full max-w-[680.37px]">
-        <PostcardFooter />
-      </div>
-
-      <div className="mx-auto mt-16 flex max-w-5xl flex-col items-center justify-between gap-4 px-6 font-dm-mono text-[11px] text-white/60 sm:flex-row">
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          <a href="mailto:francinearabela.paguio@gmail.com" className="transition-colors hover:text-white">
-            francinearabela.paguio@gmail.com
-          </a>
-          <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">
-            LinkedIn
-          </a>
-          <a href="https://www.are.na" target="_blank" rel="noreferrer" className="transition-colors hover:text-white">
-            Are.na
-          </a>
+    <>
+      {overlap ? null : <div aria-hidden="true" className="hidden h-[260px] min-[1200px]:block" />}
+      <footer className="relative bg-frame-bg px-4 pb-[50px] pt-[250px] min-[810px]:px-[40px] min-[1200px]:px-[30px] min-[1200px]:pb-[150px]">
+        <div className="absolute left-1/2 top-[-225px] z-20 hidden -translate-x-1/2 min-[1200px]:block">
+          <PostcardFooter />
         </div>
-        <p>Copyright © {new Date().getFullYear()} Francine Paguio</p>
-      </div>
-    </footer>
+
+        <div className="flex flex-wrap items-center justify-between gap-y-[4px] font-inter text-[14px] leading-[1.2] text-white">
+          <ul className="flex flex-wrap gap-x-[41px] gap-y-[4px]">
+            {links.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  {...(link.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                  className="transition-opacity hover:opacity-70"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="ml-auto">Copyright © 2026 Francine Paguio</p>
+        </div>
+      </footer>
+    </>
   );
 }

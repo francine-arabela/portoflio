@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  /* Case study page tokens */
   --paper: #ffffff;
   --ink: #1c1c1c;
   --ink-soft: #4a4a4a;
@@ -13,18 +14,16 @@
   --footer-bg: #262626;
   --card-bg: #f4f4f2;
 
-  /* Figma "Portfolio 2026" tokens */
+  /* francine.design (Framer) tokens */
   --frame-bg: #3b3b3b;
   --brand: #8b0303;
+  --off-white: #f8f6f3;
   --text-strong: #323232;
-  --text-body: #424242;
+  --text-body: #2e2e2e;
   --text-muted: #5f6566;
-  --text-desc: #685d5d;
+  --text-card: #656565;
   --tag-bg: #f2f2f2;
-  --note-blue: #d6eaff;
-  --note-green: #d0f7d6;
-  --note-green-border: #446642;
-  --font-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --tag-text: #3b3b3b;
 }
 
 @theme inline {
@@ -45,21 +44,20 @@
 
   --color-frame-bg: var(--frame-bg);
   --color-brand: var(--brand);
+  --color-off-white: var(--off-white);
   --color-text-strong: var(--text-strong);
   --color-text-body: var(--text-body);
   --color-text-muted: var(--text-muted);
-  --color-text-desc: var(--text-desc);
+  --color-text-card: var(--text-card);
   --color-tag-bg: var(--tag-bg);
-  --color-note-blue: var(--note-blue);
-  --color-note-green: var(--note-green);
-  --color-note-green-border: var(--note-green-border);
-  --font-dm-mono: var(--font-dm-mono);
-  /* Adobe Fonts families from the Figma design come first; they load when
-     NEXT_PUBLIC_ADOBE_FONTS_KIT is set. Otherwise the Google stand-ins are used. */
-  --font-serif-book: "p22-mackinac-pro", var(--font-serif-book), Georgia, serif;
-  --font-narrow: "elza-narrow", var(--font-narrow), "Arial Narrow", sans-serif;
-  --font-hand: "adobe-handwriting-ernie", var(--font-hand), cursive;
-  --font-helvetica: var(--font-helvetica);
+  --color-tag-text: var(--tag-text);
+  --font-helvetica: var(--font-helvetica), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mackinac-book: var(--font-mackinac-book), Georgia, serif;
+  --font-mackinac: var(--font-mackinac), Georgia, serif;
+  --font-feroniapi: var(--font-feroniapi), Georgia, serif;
+  --font-inter: var(--font-inter), Arial, sans-serif;
+  --font-dm-sans: var(--font-dm-sans), Arial, sans-serif;
+  --font-dm-mono: var(--font-dm-mono), monospace;
 }
 
 body {
@@ -68,8 +66,8 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-.perspective-1200 {
-  perspective: 1200px;
+.perspective-1500 {
+  perspective: 1500px;
 }
 
 .preserve-3d {
@@ -78,8 +76,24 @@ body {
 
 .backface-hidden {
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-.rotate-y-180 {
-  transform: rotateY(180deg);
+/* Perforated edge, like a postage stamp. */
+.perforated {
+  -webkit-mask:
+    radial-gradient(circle, transparent 1.1px, #000 1.3px) -2px -2px / 4px 4px,
+    linear-gradient(#000 0 0) center / calc(100% - 4px) calc(100% - 4px) no-repeat;
+  mask:
+    radial-gradient(circle, transparent 1.1px, #000 1.3px) -2px -2px / 4px 4px,
+    linear-gradient(#000 0 0) center / calc(100% - 4px) calc(100% - 4px) no-repeat;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }

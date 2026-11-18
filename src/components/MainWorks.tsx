@@ -1,80 +1,60 @@
 /* eslint-disable @next/next/no-img-element */
 import ProjectCard from "./ProjectCard";
 
-/* All image frames are 596 × 385.5 in Figma; inner positions are kept as
-   percentages of that box so the frames scale down on small screens. */
-const frameClass =
-  "relative aspect-[596/385.5] w-full overflow-hidden border border-dashed border-[#a6a6a6] bg-tag-bg";
-
-function LaptopFrame() {
-  return (
-    <div className={frameClass}>
-      {/* laptop: 527 × 295.18 at (33.29, 43.58) */}
-      <div className="absolute left-[5.586%] top-[11.305%] aspect-[527/295.18] w-[88.423%]">
-        <img src="/figma/laptop-bezel.svg" alt="" className="absolute left-[9.5%] top-0 h-[98.18%] w-[81.01%]" />
-        <img src="/figma/laptop-screen-frame.svg" alt="" className="absolute left-[10.13%] top-[0.92%] h-[93.35%] w-[79.78%]" />
-        <div className="absolute inset-[6.8%_12.32%_10.3%_12.32%] overflow-hidden bg-frame-bg">
-          <img
-            src="/figma/chatbot-screen.png"
-            alt="Sheridan student chatbot screens"
-            className="absolute left-[-82.68%] top-[-54.64%] h-[168.61%] w-[184%] max-w-none"
-          />
-        </div>
-        <img src="/figma/laptop-base.svg" alt="" className="absolute bottom-0 left-0 h-[2.95%] w-full" />
-      </div>
-    </div>
-  );
-}
-
-function ScreenshotFrame() {
-  return (
-    <div className={frameClass}>
-      {/* screenshot: 494 × 356 at (101.29, 26.65) */}
-      <div className="absolute left-[16.995%] top-[6.913%] h-[92.348%] w-[82.886%] overflow-hidden rounded-tl-[21.579px] border-[1.022px] border-[#c2c2c2]">
-        <img
-          src="/figma/scamguard-screen.png"
-          alt="Safe Guard dashboard for detecting employment scams"
-          className="absolute left-[-10.22%] top-[-3.97%] h-[104.09%] w-[116.41%] max-w-none"
-        />
-      </div>
-    </div>
-  );
-}
-
-function ComingSoonFrame() {
-  return (
-    <div className="relative flex aspect-[595.937/385.355] w-full items-center justify-center border border-dashed border-[#999] bg-white">
-      <span className="p-[8.526px] font-narrow text-[20.461px] text-brand">Coming Soon!</span>
-    </div>
-  );
-}
-
+/* "Main works" from francine.design: three project rows. */
 export default function MainWorks() {
   return (
-    <section id="works" className="mx-auto flex max-w-[1077.65px] flex-col items-center gap-[37px] px-6 pb-16 lg:pb-[262px]">
-      <p className="font-dm-mono text-[15.842px] tracking-[0.05em] text-brand">MAIN WORKS</p>
+    <section id="works" className="mx-auto flex w-full max-w-[1030px] flex-col items-center px-[30px] min-[810px]:px-[40px] min-[1200px]:px-0">
+      <h2 className="font-helvetica text-[15.84px] tracking-[0.05em] text-brand">MAIN WORKS</h2>
 
-      <div className="flex w-full flex-col gap-20 lg:gap-[110.851px]">
+      <div className="mt-[61px] flex w-full flex-col gap-[103px] min-[810px]:gap-[110.85px]">
         <ProjectCard
-          title="Improving Sheridan’s student chatbot"
-          description="Improved student chatbot during its transition to ServiceNow, enhancing information access and the student support experience."
-          tags={["UX Research", "Content Design"]}
           href="/works/sheridan-chatbot"
+          className="py-[22px] min-[810px]:py-[33px]"
+          title={
+            <>
+              Improving Sheridan’s student chatbot <em className="italic">(Shipped 2025)</em>
+            </>
+          }
+          description="Improved student chatbot during its transition to ServiceNow, enhancing information access and the student support experience."
+          tags={["Co-Op", "UX Research", "Content Design"]}
         >
-          <LaptopFrame />
+          <img
+            src="/framer/project-chatbot.png"
+            alt="Sheridan student chatbot shown on a laptop"
+            className="h-[414px] w-full max-w-[583px] object-contain min-[810px]:h-[303px] min-[1200px]:h-[414px]"
+          />
         </ProjectCard>
 
         <ProjectCard
+          className="py-[20px] min-[810px]:py-[31px]"
           title="Platform for Employment Scams"
-          description="Real-time system designed to detect and recover from job scams. It protects users throughout the entire search process—from prevention and real-time mitigation to recovery."
-          tags={["UX Research"]}
+          description="Real-time system designed to detect and recover from job scams. Through prevention and real-time mitigation to recovery."
+          tags={["RTI Second Place", "UI/UX Design", "UX Research"]}
         >
-          <ScreenshotFrame />
+          <div className="aspect-[596/386] w-full max-w-[596px] overflow-hidden bg-tag-bg">
+            <img
+              src="/framer/project-scamguard.png"
+              alt="Safe Guard dashboard for detecting employment scams"
+              className="h-full w-full object-cover"
+            />
+          </div>
         </ProjectCard>
 
-        <ProjectCard title="Thesis Project" description="In Construction!" tags={["UI/UX", "UX Research"]} muted>
-          <div className="lg:pt-[38px]">
-            <ComingSoonFrame />
+        <ProjectCard
+          narrowText
+          title={
+            <>
+              Designing for an Accessibility Startup <em className="italic">(Shipped 2026)</em>
+            </>
+          }
+          description="In Construction!"
+          tags={["UX Research", "Product Design"]}
+        >
+          <div className="relative aspect-[1.44] w-full max-w-[596px] border border-dashed border-[#999] bg-white">
+            <span className="absolute left-[52%] top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-helvetica text-[16px] text-brand min-[1200px]:text-[20.46px]">
+              Coming Soon!
+            </span>
           </div>
         </ProjectCard>
       </div>

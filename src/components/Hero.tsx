@@ -1,66 +1,53 @@
+/* eslint-disable @next/next/no-img-element */
 import DraggableNote from "./DraggableNote";
-import { BinderNote, DashedNote, FoldedNote } from "./StickyNote";
+import { BluePaper, GreenPaper, YellowNote } from "./StickyNote";
 
-/* Positions come from the Figma frame: each note's centre is given as an
-   offset from the hero column's centre line and from the top of the section. */
-const notePosition = (dx: number, top: number) => ({
-  left: `calc(50% + ${dx}px)`,
-  top: `${top}px`,
-});
-
+/* Hero from francine.design. Framer lays it out on a 924 × 636 box that stays
+   centred at every screen size; the notes are pinned inside that box and move
+   on tablet and phone. Positions are the Framer values (top-left, before
+   rotation). */
 export default function Hero() {
   return (
-    <section id="about" className="relative px-6 pb-24 pt-20 lg:pb-[285px] lg:pt-[189px]">
-      <div className="mx-auto flex w-full max-w-[463px] lg:-translate-x-[7px] flex-col items-center gap-[39px] text-center">
-        <div className="flex w-full max-w-[397px] flex-col gap-[55px]">
-          <p className="font-helvetica text-[15px] leading-[1.624] tracking-[0.05em] text-text-body">
-            Hi! I’m FRANCINE PAGUIO
+    <section id="about" className="relative h-[636px]">
+      <div className="absolute left-1/2 top-0 h-[636px] w-[924px] -translate-x-1/2">
+        <div className="absolute left-[49%] top-[43px] flex w-[463px] -translate-x-1/2 flex-col items-center text-center">
+          <p className="font-helvetica text-[13px] leading-[1.62] tracking-[0.05em] text-text-strong min-[810px]:text-[15px]">
+            PRODUCT DESIGNER
           </p>
-          <h1 className="whitespace-pre-wrap font-serif-book text-[48px] font-normal leading-[1.2] text-brand sm:text-[60px]">
-            {"UI/UX  & Visual Designer"}
+          <h1 className="mt-[37px] w-[300px] font-mackinac-book text-[50px] font-[350] leading-[1.19] text-brand min-[810px]:w-full min-[810px]:text-[60px]">
+            Francine Arabela Paguio
           </h1>
-        </div>
-
-        <div className="flex w-full max-w-[309px] flex-col items-center gap-[35px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/figma/plant.png"
+            src="/framer/plant.png"
             alt=""
             width={121}
             height={102}
-            className="h-[102px] w-[121px] object-cover object-bottom opacity-95"
+            className="mt-[92px] h-[102px] w-[121px] min-[810px]:mt-[56px]"
           />
-          <p className="font-helvetica text-[15px] font-light leading-[1.2] text-text-body">
-            A designer who is always curious, learning, and growing to create meaningful,{" "}
-            <br className="hidden sm:inline" />
-            human-centered experiences.
+          <p className="mt-[39px] w-[330px] font-helvetica text-[17px] leading-[1.2] text-text-body">
+            A designer who is always curious, learning, and growing to create meaningful,
+            people-centered experiences.
           </p>
         </div>
-      </div>
 
-      <div className="hidden lg:block">
+        {/* Yellow sticky note */}
         <DraggableNote
-          rotate={5.7}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={notePosition(253.4, 247.1)}
+          rotate={6}
+          className="absolute left-[503.5px] top-[-143px] min-[810px]:left-[695px] min-[810px]:top-[7px]"
         >
-          <FoldedNote>Previously UX Researcher @ SHERIDAN</FoldedNote>
+          <YellowNote />
         </DraggableNote>
 
-        <DraggableNote
-          rotate={-11.46}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={notePosition(-312.2, 423.3)}
-        >
-          <BinderNote>Previously Design Lead @ HACKVILLE</BinderNote>
-        </DraggableNote>
+        {/* Green "open for work" note (not draggable on the Framer site) */}
+        <div className="absolute left-[516.5px] top-[311.5px] -rotate-4 min-[810px]:left-[658.5px] min-[810px]:top-[402px]">
+          <GreenPaper />
+        </div>
 
+        {/* Blue notebook page */}
         <DraggableNote
-          rotate={7.26}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={notePosition(268.75, 517.6)}
+          className="absolute left-[263px] top-[574px] min-[810px]:left-[124px] min-[810px]:top-[284px] min-[1200px]:left-[33.5px]"
         >
-          <DashedNote>Open for work :)</DashedNote>
+          <BluePaper />
         </DraggableNote>
       </div>
     </section>

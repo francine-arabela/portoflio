@@ -1,53 +1,74 @@
-import type { ReactNode } from "react";
+/* eslint-disable @next/next/no-img-element */
 
-/* Sticky notes from the Figma hero. Each is drawn unrotated; the
-   DraggableNote wrapper applies the rotation from the design. */
+/* The three paper notes from the francine.design hero. Each is drawn at its
+   Framer size; the parent places and rotates it. */
 
-/** Yellow note with a folded bottom-right corner ("Previously UX Researcher"). */
-export function FoldedNote({ children }: { children: ReactNode }) {
+const noteText = "font-helvetica text-[14px] text-text-muted";
+
+/** Yellow sticky note with a folded corner (145 × 137, rotated 6°). */
+export function YellowNote() {
   return (
-    <div className="relative h-[136.453px] w-[144.836px]">
-      {/* eslint-disable @next/next/no-img-element */}
-      <img src="/figma/sticky-yellow.svg" alt="" width={144.836} height={136.453} className="absolute inset-0" />
+    <div className="relative h-[137px] w-[145px]">
       <img
-        src="/figma/sticky-yellow-curl.svg"
+        src="/framer/yellow-note.svg"
         alt=""
-        width={34.266}
-        height={29.664}
-        className="absolute left-[110.57px] top-[106.79px] max-w-none rotate-[-179.35deg]"
+        width={158}
+        height={151}
+        className="absolute left-[-6.5px] top-[-6px] h-[151px] w-[158px] max-w-none"
       />
-      {/* eslint-enable @next/next/no-img-element */}
-      <p className="relative w-[92.4px] pl-[26px] pt-[29px] font-helvetica text-[14px] leading-normal text-text-muted box-content">
-        {children}
+      <img
+        src="/framer/yellow-note-curl.svg"
+        alt=""
+        width={40}
+        height={36}
+        className="absolute left-[107.5px] top-[103.8px] h-[36px] w-[40px] max-w-none -rotate-6"
+      />
+      <p className={`absolute left-[26.19px] top-[28.99px] w-[92.4px] rotate-5 leading-[1.2] ${noteText}`}>
+        Previously UX Researcher @ Sheridan
       </p>
     </div>
   );
 }
 
-/** Blue note with punched binder holes along the top ("Previously Design Lead"). */
-export function BinderNote({ children }: { children: ReactNode }) {
+/** Green dashed note with the hand-drawn "Open for work :)" (165 × 59, rotated -4°). */
+export function GreenPaper() {
   return (
-    <div className="relative flex h-[118.507px] w-[217.348px] items-center justify-center bg-note-blue">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
+    <div className="relative h-[59px] w-[165px]">
       <img
-        src="/figma/binder-holes.svg"
+        src="/framer/green-paper.svg"
         alt=""
-        width={201.248}
-        height={24.15}
-        className="absolute left-1/2 top-[-7.8px] max-w-none -translate-x-1/2"
+        width={167}
+        height={71}
+        className="absolute left-[-0.86px] top-[-6.12px] h-[71px] w-[167px] max-w-none rotate-4"
       />
-      <p className="relative mt-[11px] mr-[12px] w-[149.4px] font-helvetica text-[14px] leading-normal text-text-muted">
-        {children}
-      </p>
+      <img
+        src="/framer/open-for-work.svg"
+        alt="Open for work :)"
+        width={104}
+        height={25}
+        className="absolute left-[30.21px] top-[17.33px] h-[25px] w-[104px] max-w-none rotate-4"
+      />
     </div>
   );
 }
 
-/** Green dashed note ("Open for work :)"). */
-export function DashedNote({ children }: { children: ReactNode }) {
+/** Blue lined notebook page torn from a binder (245 × 166). */
+export function BluePaper() {
   return (
-    <div className="flex h-[58.778px] w-[164.134px] skew-x-[-1.12deg] items-center justify-center border border-dashed border-note-green-border bg-note-green">
-      <p className="whitespace-nowrap font-helvetica text-[14px] leading-normal text-text-muted">{children}</p>
+    <div className="relative h-[166px] w-[245px] overflow-clip bg-[url(/framer/blue-paper.svg)] bg-[length:100%_100%]">
+      <img
+        src="/framer/blue-paper-lines.svg"
+        alt=""
+        width={245}
+        height={161}
+        className="absolute left-0 top-[-0.5px] h-[161px] w-[245px] max-w-none"
+      />
+      <p
+        className={`absolute bottom-[37.5px] left-[52%] w-[164px] -translate-x-1/2 -rotate-11 leading-[1.5] ${noteText}`}
+      >
+        Previously Design Lead
+        <br />@ Hackville
+      </p>
     </div>
   );
 }
