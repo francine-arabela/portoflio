@@ -1,142 +1,141 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useState, type FormEvent, type KeyboardEvent } from "react";
-import PondArt from "./PondArt";
 
-const CONTACT_EMAIL = "francinearabela.paguio@gmail.com";
+export const CONTACT_EMAIL = "francinearabela.paguio@gmail.com";
 
+/* The postcard from the bottom of francine.design (desktop only). The front is
+   a Monet postcard; clicking it flips the card to a small message form. The
+   face is 602 × 363 and tilted -2°. */
 export default function PostcardFooter() {
   const [flipped, setFlipped] = useState(false);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [sent, setSent] = useState(false);
 
-  function flipToBack() {
-    setFlipped(true);
-  }
-
-  function flipToFront() {
-    setFlipped(false);
-  }
-
-  function handleFrontKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+  function onFrontKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      flipToBack();
+      setFlipped(true);
     }
   }
 
-  function handleSubmit(event: FormEvent) {
+  function onSubmit(event: FormEvent) {
     event.preventDefault();
-    const subject = encodeURIComponent(`Portfolio message from ${email || "a visitor"}`);
-    const body = encodeURIComponent(`${message}\n\n— ${email}`);
+    const subject = encodeURIComponent("Message from francine.design");
+    const body = encodeURIComponent(email ? `${message}\n\nFrom: ${email}` : message);
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    setSent(true);
   }
 
+  const shadow =
+    "0 0.6px 1.6px -1px rgba(0,0,0,0.12), 0 2.3px 6px -2px rgba(0,0,0,0.12), 0 10px 26px -3px rgba(0,0,0,0.14)";
+  const label = "font-inter text-[12px] font-medium text-[#888]";
+  const field =
+    "w-full rounded-[5px] bg-[#f5f5f5] px-[10px] font-inter text-[11.44px] text-[#333] outline-none placeholder:text-[#999] focus:ring-1 focus:ring-[#ddd]";
+
   return (
-    <div className="relative z-10 mx-auto -mb-16 w-full max-w-2xl px-6 sm:-mb-20">
-      <div className="perspective-1200">
+    <div className="perspective-1500 h-[363px] w-[602px]">
+      <div
+        data-cursor="Send me a Message!"
+        className="preserve-3d relative h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.44,0,0.56,1)] hover:scale-[1.05]"
+        style={{ transform: `rotate(-2deg) rotateY(${flipped ? 180 : 0}deg)` }}
+      >
+        {/* Front */}
         <div
-          className={`relative h-[260px] w-full rotate-1 preserve-3d transition-transform duration-700 ease-out sm:h-[300px] ${
-            flipped ? "rotate-y-180" : ""
-          }`}
+          role="button"
+          tabIndex={flipped ? -1 : 0}
+          aria-label="Flip the postcard to send me a message"
+          onClick={() => setFlipped(true)}
+          onKeyDown={onFrontKeyDown}
+          className="backface-hidden absolute inset-0 cursor-pointer bg-white"
+          style={{ boxShadow: shadow }}
         >
-          {/* Front */}
-          <div
-            role="button"
-            tabIndex={0}
-            onClick={flipToBack}
-            onKeyDown={handleFrontKeyDown}
-            aria-label="Flip postcard to write a message"
-            className="absolute inset-0 grid cursor-pointer grid-cols-[1fr_1.1fr] overflow-hidden rounded-sm bg-[#fbfaf6] shadow-2xl backface-hidden sm:grid-cols-[1fr_1.3fr]"
+          <img
+            src="/framer/postcard-paper.png"
+            alt=""
+            className="absolute left-[-2px] top-[-2px] h-[366px] w-[604px] max-w-none"
+          />
+          <img
+            src="/framer/postcard-monet.png"
+            alt="Claude Monet, Bridge over a Pond of Water Lilies"
+            className="absolute left-[14.5px] top-[14px] h-[314px] w-[249px] max-w-none object-cover"
+          />
+          <img
+            src="/framer/postcard-divider.svg"
+            alt=""
+            className="absolute left-[295px] top-[13px] h-[315px] w-[3px] max-w-none"
+          />
+          <p className="absolute left-[16px] top-[336px] font-dm-mono text-[11px] tracking-[0.55px] text-text-muted">
+            PAINTING BY
+          </p>
+          <p className="absolute left-[180px] top-[337px] font-dm-mono text-[11px] tracking-[0.55px] text-text-muted">
+            CLAUDE MONET
+          </p>
+          <p className="absolute left-[337px] top-[142px] w-[216px] text-center font-mackinac-book text-[28px] font-[350] leading-[1.2] text-text-card">
+            Thank you for reading!
+          </p>
+          <span className="perforated absolute left-[389px] top-[261px] flex h-[30px] w-[106px] items-center justify-center gap-[8px] bg-brand font-helvetica text-[11px] text-white">
+            Click The Card
+            <img src="/framer/arrow-card.svg" alt="" className="h-[11px] w-[10px]" />
+          </span>
+          <span className="perforated absolute left-[533px] top-[14px] h-[60px] w-[54px] bg-brand">
+            <span className="absolute left-[4px] top-[3px] flex h-[54px] w-[47px] items-center justify-center bg-white font-feroniapi text-[28px] italic text-[rgba(139,3,3,0.8)]">
+              FP
+            </span>
+          </span>
+        </div>
+
+        {/* Back */}
+        <div
+          className="backface-hidden absolute inset-0 bg-white px-[40px] pt-[50px]"
+          style={{ transform: "rotateY(180deg)", boxShadow: shadow }}
+          aria-hidden={!flipped}
+        >
+          <button
+            type="button"
+            tabIndex={flipped ? 0 : -1}
+            onClick={() => setFlipped(false)}
+            aria-label="Close the message form"
+            className="absolute left-[548px] top-[20px] flex h-[32px] w-[32px] items-center justify-center rounded-full bg-[#f0f0f0] transition-colors hover:bg-[#e4e4e4]"
           >
-            <div className="relative h-full w-full overflow-hidden border-r border-black/10">
-              <PondArt />
-            </div>
-            <div className="relative flex flex-col justify-between p-3 sm:p-8">
-              <div className="absolute right-2 top-2 flex h-10 w-8 items-center justify-center border border-dashed border-accent sm:right-6 sm:top-6 sm:h-14 sm:w-11">
-                <span className="font-display text-sm italic text-accent sm:text-lg">FP</span>
-              </div>
+            <img src="/framer/close-x.svg" alt="" className="h-[14px] w-[19px]" />
+          </button>
 
-              <p className="mt-10 text-center font-display text-base leading-snug text-ink-soft sm:mt-6 sm:text-2xl">
-                Thank you for
-                <br />
-                reading!
-              </p>
+          <form onSubmit={onSubmit} className="flex flex-col">
+            <span className={label}>To</span>
+            <p className={`${field} mt-[6px] flex h-[32px] items-center text-[#999]`}>{CONTACT_EMAIL}</p>
 
-              <div className="flex items-end justify-between gap-2">
-                <span className="hidden font-mono text-[9px] uppercase tracking-wide text-ink-faint sm:inline">
-                  Painting by <span className="ml-1">Claude Monet</span>
-                </span>
-                <span className="flex items-center gap-1 whitespace-nowrap rounded-sm bg-accent px-2.5 py-1 font-mono text-[10px] text-paper sm:px-3 sm:py-1.5 sm:text-[11px]">
-                  Click The Card <span aria-hidden="true">↗</span>
-                </span>
-              </div>
-            </div>
-          </div>
+            <label htmlFor="postcard-email" className={`${label} mt-[24px]`}>
+              Email
+            </label>
+            <input
+              id="postcard-email"
+              type="email"
+              tabIndex={flipped ? 0 : -1}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Your email or keep yourself anonymous"
+              className={`${field} mt-[6px] h-[32px]`}
+            />
 
-          {/* Back */}
-          <div className="absolute inset-0 rotate-y-180 overflow-hidden rounded-sm bg-[#fbfaf6] shadow-2xl backface-hidden">
-            <div className="grid h-full grid-cols-1 sm:grid-cols-[1.4fr_1fr]">
-              <div
-                className="flex flex-col gap-2 p-4 sm:border-r sm:border-black/10 sm:p-6"
-                style={{
-                  backgroundImage:
-                    "repeating-linear-gradient(to bottom, transparent, transparent 27px, rgba(0,0,0,0.08) 28px)",
-                }}
-              >
-                <label className="font-mono text-[9px] uppercase tracking-wide text-ink-faint">
-                  Leave a message
-                </label>
-                {sent ? (
-                  <p className="font-display text-lg text-accent">
-                    Thanks for writing — your mail app should be opening now!
-                  </p>
-                ) : (
-                  <form onSubmit={handleSubmit} className="flex h-full flex-col gap-2">
-                    <textarea
-                      required
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Say hello, share feedback, or leave a note…"
-                      className="h-full flex-1 resize-none bg-transparent font-display text-base text-ink-soft outline-none placeholder:text-ink-faint/70"
-                    />
-                    <input
-                      required
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="your.email@example.com"
-                      className="border-t border-black/10 bg-transparent pt-2 font-mono text-xs text-ink outline-none placeholder:text-ink-faint"
-                    />
-                    <button
-                      type="submit"
-                      className="mt-1 flex w-fit items-center gap-1 self-end rounded-sm bg-accent px-3 py-1.5 font-mono text-[11px] text-paper"
-                    >
-                      Send <span aria-hidden="true">↗</span>
-                    </button>
-                  </form>
-                )}
-              </div>
+            <textarea
+              required
+              tabIndex={flipped ? 0 : -1}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              aria-label="Your message"
+              placeholder="Write your message here!"
+              className={`${field} mt-[16px] h-[84px] resize-y py-[8px]`}
+            />
 
-              <div className="flex flex-col justify-between p-4 sm:p-6">
-                <div className="ml-auto flex h-14 w-11 items-center justify-center border border-dashed border-accent">
-                  <span className="font-display text-lg italic text-accent">FP</span>
-                </div>
-                <div className="space-y-2 font-mono text-[10px] text-ink-faint">
-                  <p className="border-b border-black/10 pb-1">To: Francine Arabela Paguio</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={flipToFront}
-                  className="self-start font-mono text-[9px] uppercase tracking-wide text-ink-faint underline-offset-2 hover:underline"
-                >
-                  ← Click to flip back
-                </button>
-              </div>
-            </div>
-          </div>
+            <button
+              type="submit"
+              tabIndex={flipped ? 0 : -1}
+              className="mt-[18px] h-[34px] w-full rounded-[10px] bg-brand font-inter text-[14px] font-semibold text-white transition-opacity hover:opacity-90"
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     </div>

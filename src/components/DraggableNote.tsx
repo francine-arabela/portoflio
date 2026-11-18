@@ -1,14 +1,15 @@
 "use client";
 
-import { useRef, useState, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+import { useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 
 type DraggableNoteProps = {
   children: ReactNode;
   rotate?: number;
   className?: string;
+  style?: CSSProperties;
 };
 
-export default function DraggableNote({ children, rotate = 0, className = "" }: DraggableNoteProps) {
+export default function DraggableNote({ children, rotate = 0, className = "", style }: DraggableNoteProps) {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
   const dragStart = useRef({ pointerX: 0, pointerY: 0, posX: 0, posY: 0 });
@@ -49,6 +50,7 @@ export default function DraggableNote({ children, rotate = 0, className = "" }: 
         dragging ? "z-50 drop-shadow-xl" : "z-10"
       } ${className}`}
       style={{
+        ...style,
         transform: `translate(${pos.x}px, ${pos.y}px) rotate(${rotate}deg) ${dragging ? "scale(1.05)" : "scale(1)"}`,
       }}
     >

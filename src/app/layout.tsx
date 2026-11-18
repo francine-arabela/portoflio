@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Space_Mono, Inter } from "next/font/google";
+import { Playfair_Display, Space_Mono, Inter as InterSans } from "next/font/google";
+import { dmMono, dmSans, feroniapi, helvetica, inter, mackinac, mackinacBook } from "./fonts";
+import CustomCursor from "@/components/CustomCursor";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
+// Fonts used by the case study page.
 const playfair = Playfair_Display({
   variable: "--font-display",
   subsets: ["latin"],
@@ -14,24 +18,40 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
-const inter = Inter({
+const interSans = InterSans({
   variable: "--font-sans",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Francine Arabela Paguio — Product & Visual Designer",
+  title: "Francine Arabela Paguio — Product Designer",
   description:
-    "Product & visual designer who is always curious, learning, and growing to create meaningful, human-centered experiences.",
+    "Product designer who is always curious, learning, and growing to create meaningful, people-centered experiences.",
 };
+
+const fontVariables = [
+  playfair,
+  spaceMono,
+  interSans,
+  helvetica,
+  mackinacBook,
+  mackinac,
+  feroniapi,
+  inter,
+  dmSans,
+  dmMono,
+]
+  .map((font) => font.variable)
+  .join(" ");
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${spaceMono.variable} ${inter.variable} antialiased`}
-    >
-      <body className="bg-paper text-ink">{children}</body>
+    <html lang="en" className={`${fontVariables} antialiased`}>
+      <body className="bg-paper text-ink">
+        <SmoothScroll />
+        {children}
+        <CustomCursor />
+      </body>
     </html>
   );
 }

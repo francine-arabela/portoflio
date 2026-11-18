@@ -1,53 +1,53 @@
+/* eslint-disable @next/next/no-img-element */
 import DraggableNote from "./DraggableNote";
-import PlantIcon from "./PlantIcon";
-import { StickyNote, TornNote } from "./StickyNote";
+import { BluePaper, GreenPaper, YellowNote } from "./StickyNote";
 
+/* Hero from francine.design. Framer lays it out on a 924 × 636 box that stays
+   centred at every screen size; the notes are pinned inside that box and move
+   on tablet and phone. Positions are the Framer values (top-left, before
+   rotation). */
 export default function Hero() {
   return (
-    <section id="top" className="relative mx-auto max-w-5xl px-6 pb-20 pt-16 text-center sm:pt-24">
-      <p className="font-mono text-xs tracking-[0.2em] text-ink-soft">
-        PRODUCT &amp; VISUAL DESIGNER
-      </p>
-
-      <div className="relative mt-4">
-        <h1 className="font-display text-5xl leading-tight text-accent sm:text-6xl">
-          Francine
-          <br />
-          Arabela Paguio
-        </h1>
-
-        <DraggableNote
-          rotate={3}
-          className="absolute -right-4 -top-10 hidden sm:block sm:-right-16 sm:-top-16"
-        >
-          <StickyNote color="yellow">
-            Previously UX
-            <br />
-            Researcher @<br />
-            Sheridan
-          </StickyNote>
-        </DraggableNote>
-      </div>
-
-      <div className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-10">
-        <DraggableNote rotate={-6} className="hidden sm:block">
-          <TornNote>
-            Previously Design
-            <br />
-            Lead @ Hackville
-          </TornNote>
-        </DraggableNote>
-
-        <div className="flex flex-col items-center gap-4">
-          <PlantIcon className="h-10 w-10" />
-          <p className="max-w-xs text-sm leading-relaxed text-ink-soft">
-            A designer who is always curious, learning, and growing to create
-            meaningful, human-centered experiences.
+    <section id="about" className="relative h-[636px]">
+      <div className="absolute left-1/2 top-0 h-[636px] w-[924px] -translate-x-1/2">
+        <div className="absolute left-[49%] top-[43px] flex w-[463px] -translate-x-1/2 flex-col items-center text-center">
+          <p className="font-helvetica text-[13px] leading-[1.62] tracking-[0.05em] text-text-strong min-[810px]:text-[15px]">
+            PRODUCT DESIGNER
+          </p>
+          <h1 className="mt-[37px] w-[300px] font-mackinac-book text-[50px] font-[350] leading-[1.19] text-brand min-[810px]:w-full min-[810px]:text-[60px]">
+            Francine Arabela Paguio
+          </h1>
+          <img
+            src="/framer/plant.png"
+            alt=""
+            width={121}
+            height={102}
+            className="mt-[92px] h-[102px] w-[121px] min-[810px]:mt-[56px]"
+          />
+          <p className="mt-[39px] w-[330px] font-helvetica text-[17px] leading-[1.2] text-text-body">
+            A designer who is always curious, learning, and growing to create meaningful,
+            people-centered experiences.
           </p>
         </div>
 
-        <DraggableNote rotate={2} className="hidden sm:block">
-          <StickyNote color="green">Open for work :)</StickyNote>
+        {/* Yellow sticky note */}
+        <DraggableNote
+          rotate={6}
+          className="absolute left-[503.5px] top-[-143px] min-[810px]:left-[695px] min-[810px]:top-[7px]"
+        >
+          <YellowNote />
+        </DraggableNote>
+
+        {/* Green "open for work" note (not draggable on the Framer site) */}
+        <div className="absolute left-[516.5px] top-[311.5px] -rotate-4 min-[810px]:left-[658.5px] min-[810px]:top-[402px]">
+          <GreenPaper />
+        </div>
+
+        {/* Blue notebook page */}
+        <DraggableNote
+          className="absolute left-[263px] top-[574px] min-[810px]:left-[124px] min-[810px]:top-[284px] min-[1200px]:left-[33.5px]"
+        >
+          <BluePaper />
         </DraggableNote>
       </div>
     </section>
