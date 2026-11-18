@@ -54,9 +54,11 @@
   --color-note-green: var(--note-green);
   --color-note-green-border: var(--note-green-border);
   --font-dm-mono: var(--font-dm-mono);
-  --font-serif-book: var(--font-serif-book);
-  --font-narrow: var(--font-narrow);
-  --font-hand: var(--font-hand);
+  /* Adobe Fonts families from the Figma design come first; they load when
+     NEXT_PUBLIC_ADOBE_FONTS_KIT is set. Otherwise the Google stand-ins are used. */
+  --font-serif-book: "p22-mackinac-pro", var(--font-serif-book), Georgia, serif;
+  --font-narrow: "elza-narrow", var(--font-narrow), "Arial Narrow", sans-serif;
+  --font-hand: "adobe-handwriting-ernie", var(--font-hand), cursive;
   --font-helvetica: var(--font-helvetica);
 }
 

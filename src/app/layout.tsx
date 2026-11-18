@@ -58,12 +58,22 @@ export const metadata: Metadata = {
     "UI/UX & visual designer who is always curious, learning, and growing to create meaningful, human-centered experiences.",
 };
 
+// Adobe Fonts web project ID (fonts.adobe.com → Web Projects), e.g. "abc1234".
+// Set it in Vercel's environment variables to load the real design fonts.
+const adobeFontsKit = process.env.NEXT_PUBLIC_ADOBE_FONTS_KIT;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       className={`${playfair.variable} ${spaceMono.variable} ${inter.variable} ${dmMono.variable} ${fraunces.variable} ${archivoNarrow.variable} ${caveat.variable} antialiased`}
     >
+      {adobeFontsKit ? (
+        <head>
+          <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
+          <link rel="stylesheet" href={`https://use.typekit.net/${adobeFontsKit}.css`} />
+        </head>
+      ) : null}
       <body className="bg-paper text-ink">{children}</body>
     </html>
   );
